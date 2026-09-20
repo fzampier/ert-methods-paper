@@ -26,6 +26,7 @@ scripts produced.
 | `data/README.md` | How to obtain the ARMA and FACTT data, and where the scripts expect them. |
 | `MANIFEST.sha256` | SHA-256 of every frozen table, figure, and supplementary file. |
 | `sessionInfo.txt` | R and package versions of the frozen runs. |
+| `CITATION.cff` | Citation metadata for this repository and its archived releases. |
 
 ## Requirements
 

@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this code or these results, please cite the article named in the README."
+title: "e-RT: code and frozen results for the article 'Sequential randomization tests using e-values for clinical trial monitoring across endpoint types'"
+type: software
+authors:
+  - family-names: Zampieri
+    given-names: Fernando G.
+    affiliation: "Department of Critical Care Medicine, University of Alberta, Edmonton, Alberta, Canada"
+  - family-names: Albuquerque
+    given-names: Arthur M.
+    affiliation: "Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil"
+  - family-names: Ramdas
+    given-names: Aaditya
+    affiliation: "Department of Statistics and Data Science, Carnegie Mellon University, Pittsburgh, Pennsylvania, USA"
+abstract: >-
+  R code and frozen simulation outputs for the e-RT article. e-RT is a
+  randomization-based e-value method for continuous monitoring of randomized
+  trials, with variants for binary (e-RTb), event-only (e-RTe), and continuous
+  (e-RTc) endpoints. The repository holds the three kernels, one script per
+  simulation, table, and figure of the article and its Electronic Supplementary
+  Material, the frozen tables and figures those scripts produced, and checks
+  that compare the numbers quoted in the article with the frozen outputs.
+  Patient-level ARMA and FACTT data are not included; they are available from
+  BioLINCC.
+keywords:
+  - e-values
+  - e-processes
+  - randomization tests
+  - sequential analysis
+  - anytime-valid inference
+  - clinical trial monitoring
+  - data safety monitoring boards
+license: MIT
+repository-code: "https://github.com/fzampier/ert-methods-paper"
