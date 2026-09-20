@@ -1,0 +1,13 @@
+# Patient-level BioLINCC data, and every file the trial scripts derive from it,
+# stay local. Only data/README.md is tracked.
+data/*
+!data/README.md
+outputs/
+
+# Demo block of R/ertb.R (options(ert.run_demo = TRUE))
+traj_*.pdf
+
+.DS_Store
+.Rhistory
+.RData
+Rplots.pdf

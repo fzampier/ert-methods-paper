@@ -1,0 +1,15 @@
+"scenario","threshold","method","interrupted_any","median_interruption","median_type_m"
+"Alternative: 35% vs 30%",0.975,"Bayes scheduled Pr(benefit)>0.9750",0.8108,1793,1.08337938401486
+"Null: 35% vs 35%",0.975,"Bayes scheduled Pr(benefit)>0.9750",0.0582,1793,1.75064663285206
+"Alternative: 35% vs 30%",0.98,"Bayes scheduled Pr(benefit)>0.9800",0.7886,1793,1.07961844090303
+"Null: 35% vs 35%",0.98,"Bayes scheduled Pr(benefit)>0.9800",0.0472,1793,1.75489647294936
+"Alternative: 35% vs 30%",0.985,"Bayes scheduled Pr(benefit)>0.9850",0.7532,1793,1.07344017612022
+"Null: 35% vs 35%",0.985,"Bayes scheduled Pr(benefit)>0.9850",0.0358,1793,1.75064663285206
+"Alternative: 35% vs 30%",0.99,"Bayes scheduled Pr(benefit)>0.9900",0.7002,1793,1.06738130902522
+"Null: 35% vs 35%",0.99,"Bayes scheduled Pr(benefit)>0.9900",0.0248,1793,1.83558307603929
+"Alternative: 35% vs 30%",0.995,"Bayes scheduled Pr(benefit)>0.9950",0.6074,1793,1.04023540061494
+"Null: 35% vs 35%",0.995,"Bayes scheduled Pr(benefit)>0.9950",0.0148,1793,1.68287231717195
+"Alternative: 35% vs 30%",0.9954,"Bayes scheduled Pr(benefit)>0.9954",0.5984,1793,1.03963052784469
+"Null: 35% vs 35%",0.9954,"Bayes scheduled Pr(benefit)>0.9954",0.0136,1793,1.65719762176804
+"Alternative: 35% vs 30%",0.999,"Bayes scheduled Pr(benefit)>0.9990",0.4052,1793,1
+"Null: 35% vs 35%",0.999,"Bayes scheduled Pr(benefit)>0.9990",0.0034,1793,1.14830789062431

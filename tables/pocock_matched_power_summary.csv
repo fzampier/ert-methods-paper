@@ -1,0 +1,7 @@
+"metric","value","n_patients","n_sims"
+"pocock_alt_interruption",0.7834,3084,5000
+"pocock_null_interruption",0.0492,3084,5000
+"ertb_design_alt_interruption",0.8002,3084,5000
+"ertb_adaptive_alt_interruption",0.5168,3084,5000
+"ertb_design_earlier_than_pocock",0.928422696512233,3084,5000
+"ertb_adaptive_earlier_than_pocock",0.627979679562329,3084,5000

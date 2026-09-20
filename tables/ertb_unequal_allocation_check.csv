@@ -1,0 +1,5 @@
+"scenario","allocation","method","crossing_rate","se"
+"Null: 35% vs 35%","2:1 (p=2/3)","e-RTb design (generalized lambda*)",0.0386,0.00272433624943765
+"Null: 35% vs 35%","2:1 (p=2/3)","e-RTb adaptive (as shipped; 0.5-centered bet)",0.0432,0.00287519599331941
+"Alternative: 35% vs 30%","2:1 (p=2/3)","e-RTb design (generalized lambda*)",0.698,0.00649301162789657
+"Alternative: 35% vs 30%","2:1 (p=2/3)","e-RTb adaptive (as shipped; 0.5-centered bet)",0.0422,0.00284320804725929

@@ -1,0 +1,25 @@
+"scenario","method","batch","crossed","se","median_crossing"
+"Alternative: 35% vs 30%","e-RTb adaptive",1,0.4586,0.00704678706929619,1343
+"Alternative: 35% vs 30%","e-RTb adaptive",50,0.4172,0.0069734376027896,1525
+"Alternative: 35% vs 30%","e-RTb adaptive",100,0.4002,0.00692877997918826,1600
+"Alternative: 35% vs 30%","e-RTb adaptive",250,0.3722,0.00683618548607336,1750
+"Alternative: 35% vs 30%","e-RTb design directional",1,0.7486,0.00613511271290104,1282
+"Alternative: 35% vs 30%","e-RTb design directional",50,0.7236,0.00632460338677454,1350
+"Alternative: 35% vs 30%","e-RTb design directional",100,0.7112,0.00640928326726164,1400
+"Alternative: 35% vs 30%","e-RTb design directional",250,0.6904,0.00653831537936187,1500
+"Alternative: 35% vs 30%","e-RTb mixture two-sided",1,0.644,0.00677146955985183,1506.5
+"Alternative: 35% vs 30%","e-RTb mixture two-sided",50,0.6208,0.00686159398390782,1600
+"Alternative: 35% vs 30%","e-RTb mixture two-sided",100,0.609,0.00690099992754673,1600
+"Alternative: 35% vs 30%","e-RTb mixture two-sided",250,0.5898,0.00695609028118526,1750
+"Null: 35% vs 35%","e-RTb adaptive",1,0.0314,0.00246633493264804,421
+"Null: 35% vs 35%","e-RTb adaptive",50,0.0196,0.001960399959192,625
+"Null: 35% vs 35%","e-RTb adaptive",100,0.0154,0.00174142700105402,700
+"Null: 35% vs 35%","e-RTb adaptive",250,0.012,0.00153987012439361,750
+"Null: 35% vs 35%","e-RTb design directional",1,0.0406,0.00279111590586991,1358
+"Null: 35% vs 35%","e-RTb design directional",50,0.0318,0.00248148181536758,1400
+"Null: 35% vs 35%","e-RTb design directional",100,0.0304,0.00242799670510485,1500
+"Null: 35% vs 35%","e-RTb design directional",250,0.025,0.00220794021658196,1500
+"Null: 35% vs 35%","e-RTb mixture two-sided",1,0.0332,0.0025336834845734,1655
+"Null: 35% vs 35%","e-RTb mixture two-sided",50,0.027,0.00229220417938717,1750
+"Null: 35% vs 35%","e-RTb mixture two-sided",100,0.0232,0.0021289321266776,1750
+"Null: 35% vs 35%","e-RTb mixture two-sided",250,0.0176,0.00185958274889826,1750

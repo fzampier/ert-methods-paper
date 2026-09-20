@@ -1,0 +1,29 @@
+"scenario","threshold","bayes_method","ert_method","combined_signal","median_combined_signal","bayes_only","ert_only","both"
+"Alternative: 35% vs 30%",0.975,"Bayes scheduled Pr(benefit)>0.9750","e-RTb adaptive",0.8132,1657.5,0.358,0.0024,0.4528
+"Null: 35% vs 35%",0.975,"Bayes scheduled Pr(benefit)>0.9750","e-RTb adaptive",0.0754,897,0.0454,0.0172,0.0128
+"Alternative: 35% vs 30%",0.98,"Bayes scheduled Pr(benefit)>0.9800","e-RTb adaptive",0.7914,1770,0.3362,0.0028,0.4524
+"Null: 35% vs 35%",0.98,"Bayes scheduled Pr(benefit)>0.9800","e-RTb adaptive",0.0656,897,0.0356,0.0184,0.0116
+"Alternative: 35% vs 30%",0.985,"Bayes scheduled Pr(benefit)>0.9850","e-RTb adaptive",0.7586,1793,0.3034,0.0054,0.4498
+"Null: 35% vs 35%",0.985,"Bayes scheduled Pr(benefit)>0.9850","e-RTb adaptive",0.0552,897,0.0252,0.0194,0.0106
+"Alternative: 35% vs 30%",0.99,"Bayes scheduled Pr(benefit)>0.9900","e-RTb adaptive",0.7092,1789.5,0.254,0.009,0.4462
+"Null: 35% vs 35%",0.99,"Bayes scheduled Pr(benefit)>0.9900","e-RTb adaptive",0.046,897,0.016,0.0212,0.0088
+"Alternative: 35% vs 30%",0.995,"Bayes scheduled Pr(benefit)>0.9950","e-RTb adaptive",0.6292,1728.5,0.174,0.0218,0.4334
+"Null: 35% vs 35%",0.995,"Bayes scheduled Pr(benefit)>0.9950","e-RTb adaptive",0.0376,830.5,0.0076,0.0228,0.0072
+"Alternative: 35% vs 30%",0.9954,"Bayes scheduled Pr(benefit)>0.9954","e-RTb adaptive",0.6218,1707,0.1666,0.0234,0.4318
+"Null: 35% vs 35%",0.9954,"Bayes scheduled Pr(benefit)>0.9954","e-RTb adaptive",0.0366,818,0.0066,0.023,0.007
+"Alternative: 35% vs 30%",0.999,"Bayes scheduled Pr(benefit)>0.9990","e-RTb adaptive",0.504,1452.5,0.0488,0.0988,0.3564
+"Null: 35% vs 35%",0.999,"Bayes scheduled Pr(benefit)>0.9990","e-RTb adaptive",0.0304,588,4e-04,0.027,0.003
+"Alternative: 35% vs 30%",0.975,"Bayes scheduled Pr(benefit)>0.9750","e-RTb design directional",0.8176,1212.5,0.0758,0.0068,0.735
+"Null: 35% vs 35%",0.975,"Bayes scheduled Pr(benefit)>0.9750","e-RTb design directional",0.0624,1259,0.0216,0.0042,0.0366
+"Alternative: 35% vs 30%",0.98,"Bayes scheduled Pr(benefit)>0.9800","e-RTb design directional",0.8002,1238,0.0584,0.0116,0.7302
+"Null: 35% vs 35%",0.98,"Bayes scheduled Pr(benefit)>0.9800","e-RTb design directional",0.0546,1220,0.0138,0.0074,0.0334
+"Alternative: 35% vs 30%",0.985,"Bayes scheduled Pr(benefit)>0.9850","e-RTb design directional",0.7766,1247,0.0348,0.0234,0.7184
+"Null: 35% vs 35%",0.985,"Bayes scheduled Pr(benefit)>0.9850","e-RTb design directional",0.048,1241.5,0.0072,0.0122,0.0286
+"Alternative: 35% vs 30%",0.99,"Bayes scheduled Pr(benefit)>0.9900","e-RTb design directional",0.7524,1251.5,0.0106,0.0522,0.6896
+"Null: 35% vs 35%",0.99,"Bayes scheduled Pr(benefit)>0.9900","e-RTb design directional",0.0422,1244,0.0014,0.0174,0.0234
+"Alternative: 35% vs 30%",0.995,"Bayes scheduled Pr(benefit)>0.9950","e-RTb design directional",0.7418,1260,0,0.1344,0.6074
+"Null: 35% vs 35%",0.995,"Bayes scheduled Pr(benefit)>0.9950","e-RTb design directional",0.0408,1266.5,0,0.026,0.0148
+"Alternative: 35% vs 30%",0.9954,"Bayes scheduled Pr(benefit)>0.9954","e-RTb design directional",0.7418,1260,0,0.1434,0.5984
+"Null: 35% vs 35%",0.9954,"Bayes scheduled Pr(benefit)>0.9954","e-RTb design directional",0.0408,1266.5,0,0.0272,0.0136
+"Alternative: 35% vs 30%",0.999,"Bayes scheduled Pr(benefit)>0.9990","e-RTb design directional",0.7418,1260,0,0.3366,0.4052
+"Null: 35% vs 35%",0.999,"Bayes scheduled Pr(benefit)>0.9990","e-RTb design directional",0.0408,1266.5,0,0.0374,0.0034

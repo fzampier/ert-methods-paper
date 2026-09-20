@@ -1,0 +1,10 @@
+"method","lag","crossing_rate","alert_before_enrollment_end","median_calendar_alert"
+"e-RTb adaptive",0,0.4586,0.4586,1343
+"e-RTb design directional",0,0.7486,0.7486,1282
+"e-RTb mixture two-sided",0,0.644,0.644,1506.5
+"e-RTb adaptive",100,0.4586,0.441,1443
+"e-RTb design directional",100,0.7486,0.7326,1382
+"e-RTb mixture two-sided",100,0.644,0.626,1606.5
+"e-RTb adaptive",300,0.4586,0.4092,1643
+"e-RTb design directional",300,0.7486,0.6964,1582
+"e-RTb mixture two-sided",300,0.644,0.5848,1806.5
