@@ -1,6 +1,6 @@
 # T7: Unconditional cumulative crossing probabilities at the scheduled looks
 # (all trials as denominator) for every method in the fair-comparator run.
-# Answers R4.5's demand for time-anchored unconditional metrics; post-processing
+# Answers R4.5's request for time-anchored unconditional metrics; post-processing
 # of the per-trial first crossings -- no rerun, no RNG.
 #
 # Input : tables/fair_comparators_first_crossings.csv

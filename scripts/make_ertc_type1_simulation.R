@@ -1,9 +1,8 @@
 # Empirical Type I error for e-RTc under several null data-generating processes.
 #
-# Audited gap (blindspot 2026-05-17): Section 3 simulates Type I exhaustively
-# for e-RTb but never directly for e-RTc, even though the load-bearing
-# Section 4 FACTT illustration (98.9% permutation crossings on fluid VFD-28)
-# uses e-RTc with the Cohen's-d wager. This script closes that gap.
+# The simulations cover Type I error exhaustively for e-RTb. This script does
+# the same for e-RTc, which the FACTT illustration (98.9% permutation crossings
+# on fluid VFD-28) uses with the Cohen's-d wager.
 #
 # DGPs cover the regimes relevant to the manuscript:
 #   - Normal(0,1)             : canonical continuous baseline

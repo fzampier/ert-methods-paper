@@ -16,8 +16,8 @@
 # expected list here. This is by design — a failure is a signal that prose
 # and tables must be re-synced.
 #
-# Layout follows the article: §2 construction/family, §3 deployment
-# (Table 1, Table 2, worked alert, lead time), §5 completed trials, §6
+# Layout follows the article: construction and the e-RT family, practical
+# deployment (Table 1, Table 2, worked alert, lead time), completed trials,
 # discussion bridges, then ESM anchor pins and carried submission-freeze
 # pins that back ESM Section 5's continuity tables, then the round-2
 # premium decomposition (ESM Table S20) and the out-of-order p_i check.
@@ -100,33 +100,33 @@ md_range <- function(md_path, row_pattern, col_index) {
   as.numeric(m[1:2])
 }
 
-cat("=== §2 family: overall behaviour (main text; backed by ESM Sections 1–3) ===\n")
+cat("=== Construction, the e-RT family: overall behaviour (main text; ESM Sections 1-3) ===\n")
 
 oc <- read.csv(file.path(tables_dir, "ertb_section3_fresh_operating_characteristics.csv"),
                stringsAsFactors = FALSE)
 oc_null <- oc[oc$scenario_type == "null", ]
 oc_alt <- oc[oc$scenario_type == "alternative" & oc$policy == "matched", ]
 # "0.5–4.6% for e-RTb across wager policies"
-require_eq("§2 e-RTb null min (prose 0.5%)", min(oc_null$rejection_rate), 0.0052, 0.0005)
-require_eq("§2 e-RTb null max (prose 4.6%)", max(oc_null$rejection_rate), 0.0464, 0.0005)
+require_eq("Construction: e-RTb null min (prose 0.5%)", min(oc_null$rejection_rate), 0.0052, 0.0005)
+require_eq("Construction: e-RTb null max (prose 4.6%)", max(oc_null$rejection_rate), 0.0464, 0.0005)
 # "matched design wagers cross in 75–86% (e-RTb)"
-require_eq("§2 e-RTb matched power min (prose 75%)", min(oc_alt$rejection_rate), 0.7494, 0.003)
-require_eq("§2 e-RTb matched power max (prose 86%)", max(oc_alt$rejection_rate), 0.8610, 0.003)
+require_eq("Construction: e-RTb matched power min (prose 75%)", min(oc_alt$rejection_rate), 0.7494, 0.003)
+require_eq("Construction: e-RTb matched power max (prose 86%)", max(oc_alt$rejection_rate), 0.8610, 0.003)
 
 cens <- read.csv(file.path(tables_dir, "erte_censoring_null.csv"), stringsAsFactors = FALSE)
 # "2.4% for e-RTe" (uncensored null, adaptive)
-require_eq("§2 e-RTe null (prose 2.4%)",
+require_eq("Construction: e-RTe null (prose 2.4%)",
            cens$crossing_rate[cens$censoring_fraction == 0 & cens$bettor == "adaptive"],
            0.0238, 0.0015)
 # "null crossing rate rises smoothly to certainty" under one-arm non-ascertainment
-require_true("§2 e-RTe censoring detection: 50% censoring null rate >= 99.9%",
+require_true("Construction: e-RTe censoring detection: 50% censoring null rate >= 99.9%",
              all(cens$crossing_rate[cens$censoring_fraction == 0.5] >= 0.999))
 
 epw <- read.csv(file.path(tables_dir, "erte_power_check.csv"), stringsAsFactors = FALSE)
 epw_design <- epw[epw$bettor == "Design matched", ]
 # "43–67% (e-RTe, which discards the non-event stream)"
-require_eq("§2 e-RTe design power min (prose 43%)", min(epw_design$power), 0.434, 0.003)
-require_eq("§2 e-RTe design power max (prose 67%)", max(epw_design$power), 0.670, 0.003)
+require_eq("Construction: e-RTe design power min (prose 43%)", min(epw_design$power), 0.434, 0.003)
+require_eq("Construction: e-RTe design power max (prose 67%)", max(epw_design$power), 0.670, 0.003)
 
 ertc_t1 <- read.csv(file.path(tables_dir, "ertc_type1_simulation.csv"),
                     stringsAsFactors = FALSE)
@@ -135,10 +135,10 @@ t1_conserv <- ertc_t1[grepl("^Conservative", ertc_t1$setting), ]
 t1_caps <- ertc_t1[grepl("c_max=0\\.[48]", ertc_t1$setting), ]
 # "4.1–4.5% (default) or 2.4–2.6% (conservative) for e-RTc" (cap-sensitivity
 # rows are a separate ESM S10 block, pinned below)
-require_eq("§2 e-RTc null default min (prose 4.1%)", min(t1_default$type1), 0.041, 0.002)
-require_eq("§2 e-RTc null default max (prose 4.5%)", max(t1_default$type1), 0.045, 0.002)
-require_eq("§2 e-RTc null conservative min (prose 2.4%)", min(t1_conserv$type1), 0.024, 0.002)
-require_eq("§2 e-RTc null conservative max (prose 2.6%)", max(t1_conserv$type1), 0.026, 0.002)
+require_eq("Construction: e-RTc null default min (prose 4.1%)", min(t1_default$type1), 0.041, 0.002)
+require_eq("Construction: e-RTc null default max (prose 4.5%)", max(t1_default$type1), 0.045, 0.002)
+require_eq("Construction: e-RTc null conservative min (prose 2.4%)", min(t1_conserv$type1), 0.024, 0.002)
+require_eq("Construction: e-RTc null conservative max (prose 2.6%)", max(t1_conserv$type1), 0.026, 0.002)
 # ESM S10 wager-cap sensitivity (R4.m9 freeze amendment): c_max 0.4/0.8 bracket
 require_true("ESM S10 cap-sensitivity rows present (8)", nrow(t1_caps) == 8L)
 require_eq("ESM S10 cap-sensitivity null min (3.7%)", min(t1_caps$type1), 0.037, 0.002)
@@ -147,44 +147,44 @@ require_eq("ESM S10 cap-sensitivity null max (4.8%)", max(t1_caps$type1), 0.048,
 cpw <- read.csv(file.path(tables_dir, "ertc_power_check.csv"), stringsAsFactors = FALSE)
 cpw_design <- cpw[grepl("^Design matched", cpw$bettor), ]
 # "71–85% (e-RTc)"
-require_eq("§2 e-RTc design power min (prose 71%)", min(cpw_design$power), 0.7128, 0.003)
-require_eq("§2 e-RTc design power max (prose 85%)", max(cpw_design$power), 0.8486, 0.003)
+require_eq("Construction: e-RTc design power min (prose 71%)", min(cpw_design$power), 0.7128, 0.003)
+require_eq("Construction: e-RTc design power max (prose 85%)", max(cpw_design$power), 0.8486, 0.003)
 
 blocked_md <- file.path(tables_dir, "ertb_blocked_randomization_sensitivity.md")
 # "permuted blocks with the conditional p_i (null 2.2%)"
-require_eq("§2 blocked conditional p_i null (prose 2.2%)",
+require_eq("Construction: blocked conditional p_i null (prose 2.2%)",
            md_num(blocked_md, "correct conditional", 2, pct = TRUE), 0.022, 0.0015)
 # "a bettor exploiting block bookkeeping against a naive 0.5 is a certain false
 # signal" — ESM 1.3 worked numbers 100.0% / median 14; adaptive naive exposure 2.6%
-require_eq("§2/ESM1.3 history-only naive bettor null (100.0%)",
+require_eq("Construction/ESM 1.3 history-only naive bettor null (100.0%)",
            md_num(blocked_md, "History-only bettor", 2, pct = TRUE), 1.000, 0.0005)
-require_eq("§2/ESM1.3 history-only naive bettor median crossing (14)",
+require_eq("Construction/ESM 1.3 history-only naive bettor median crossing (14)",
            md_num(blocked_md, "History-only bettor", 3), 14, 0.5)
-require_eq("§5/ESM1.3 adaptive naive-0.5 exposure (2.6%)",
+require_eq("Completed trials/ESM 1.3 adaptive naive-0.5 exposure (2.6%)",
            md_num(blocked_md, "practical exposure", 2, pct = TRUE), 0.026, 0.0015)
 
 uneq <- read.csv(file.path(tables_dir, "ertb_unequal_allocation_check.csv"),
                  stringsAsFactors = FALSE)
 # "under 2:1 allocation (design power 69.8%)"
-require_eq("§2 2:1 allocation design power (prose 69.8%)",
+require_eq("Construction: 2:1 allocation design power (prose 69.8%)",
            uneq$crossing_rate[grepl("^Alternative", uneq$scenario) &
                                 grepl("design", uneq$method)],
            0.698, 0.003)
 
-cat("\n=== §3 deployment: worked alert (Figure 3; ESM S20 replay) ===\n")
+cat("\n=== Deployment: worked alert (Figure 3; ESM Section 4.1) ===\n")
 
 walert_md <- file.path(tables_dir, "worked_alert_replay.md")
 # "Wealth crosses 20 at patient 1,310 ... z is 2.56 ... 483 patients (18% of enrollment)"
-require_eq("§3 worked alert crossing patient (1,310)",
+require_eq("Deployment: worked alert crossing patient (1,310)",
            md_num(walert_md, "ALERT_N", 2), 1310, 0.5)
-require_eq("§3 worked alert companion z (2.56)",
+require_eq("Deployment: worked alert companion z (2.56)",
            md_num(walert_md, "ALERT_Z", 2), 2.56, 0.005)
-require_eq("§3 worked alert lead (483 patients)",
+require_eq("Deployment: worked alert lead (483 patients)",
            md_num(walert_md, "LEAD_N", 2), 483, 0.5)
-require_eq("§3 worked alert lead (18% of enrollment)",
+require_eq("Deployment: worked alert lead (18% of enrollment)",
            md_num(walert_md, "LEAD_PCT", 2, pct = TRUE), 0.18, 0.005)
 
-cat("\n=== §3 Table 1: fair comparators (fresh seeds) ===\n")
+cat("\n=== Deployment, Table 1: fair comparators (fresh seeds) ===\n")
 
 fair <- read.csv(file.path(tables_dir, "fair_comparators_method_summary.csv"),
                  stringsAsFactors = FALSE)
@@ -216,18 +216,18 @@ pin_t1("OBF two-sided",               0.795, 1793, 2259, 0.059, 0.777)
 pin_t1("Pocock two-sided",            0.716, 1793, 2012, 0.051, 0.694)
 pin_t1("Haybittle-Peto",              0.789, 2690, 2505, 0.054, 0.772)
 
-# Derived headline (§3 prose + Abstract): "beats design e-RTb on power by 11.6
+# Derived headline (deployment prose + Abstract): "beats design e-RTb on power by 11.6
 # percentage points"
 gap <- get_fair(alt, "LD-OBF K3 one-sided a=0.05")$crossed_any -
   get_fair(alt, "e-RTb design directional")$crossed_any
-require_eq("§3/Abstract derived 11.6-pt power gap", gap, 0.116, 0.002)
+require_eq("Deployment/Abstract derived 11.6-pt power gap", gap, 0.116, 0.002)
 # "The mixture ... pays about ten points relative to the design wager"
-require_eq("§3 mixture-vs-design ~10-pt cost",
+require_eq("Deployment: mixture-vs-design ~10-pt cost",
            get_fair(alt, "e-RTb design directional")$crossed_any -
              get_fair(alt, "e-RTb mixture two-sided")$crossed_any,
            0.105, 0.005)
 
-cat("\n=== §3 time-resolved trade (cumulative at looks; ESM S15) ===\n")
+cat("\n=== Deployment: time-resolved trade (cumulative at looks; ESM S15) ===\n")
 
 cum <- read.csv(file.path(tables_dir, "fair_comparators_cumulative_at_looks.csv"),
                 stringsAsFactors = FALSE)
@@ -239,20 +239,20 @@ get_cum <- function(scen, meth) {
 # "by the first scheduled look design e-RTb has crossed in 20.5% ... against 5.2%
 # for its calibrated one-sided rival, the curves are nearly level by two-thirds
 # information (55.5 vs 54.3), and the scheduled designs have won by the final look"
-require_eq("§3 design e-RTb cum at look 1 (20.5%)",
+require_eq("Deployment: design e-RTb cum at look 1 (20.5%)",
            get_cum(alt, "e-RTb design directional")$cum_897, 0.205, 0.003)
-require_eq("§3 LD-OBF K3 1s cum at look 1 (5.2%)",
+require_eq("Deployment: LD-OBF K3 1s cum at look 1 (5.2%)",
            get_cum(alt, "LD-OBF K3 one-sided a=0.05")$cum_897, 0.052, 0.003)
 require_eq("ESM S15 KD rho=1 cum at look 1 (13.0%)",
            get_cum(alt, "KD rho=1 K5 one-sided a=0.05")$cum_897, 0.130, 0.003)
-require_eq("§3 design e-RTb cum at look 2 (55.5%)",
+require_eq("Deployment: design e-RTb cum at look 2 (55.5%)",
            get_cum(alt, "e-RTb design directional")$cum_1793, 0.555, 0.003)
-require_eq("§3 LD-OBF K3 1s cum at look 2 (54.3%)",
+require_eq("Deployment: LD-OBF K3 1s cum at look 2 (54.3%)",
            get_cum(alt, "LD-OBF K3 one-sided a=0.05")$cum_1793, 0.543, 0.003)
 require_eq("ESM S15 KD rho=1 cum at look 2 (54.7%)",
            get_cum(alt, "KD rho=1 K5 one-sided a=0.05")$cum_1793, 0.547, 0.003)
 
-cat("\n=== §3 Figure 5: price of anytime validity (power_vs_K; ESM S14) ===\n")
+cat("\n=== Deployment, Figure 5: price of anytime validity (power_vs_K) ===\n")
 
 pvk <- read.csv(file.path(tables_dir, "power_vs_K.csv"), stringsAsFactors = FALSE)
 pvk1 <- pvk[pvk$sided == 1 & pvk$alpha == 0.05, ]
@@ -265,23 +265,23 @@ require_eq("Fig 5 K=20 power (85.2%)", row_k(20)$power, 0.8524, 0.001)
 require_eq("Fig 5 K=20 boundary (1.839)", row_k(20)$final_boundary, 1.839, 0.0015)
 require_eq("Fig 5 K=20 expected N (1,848)", row_k(20)$expected_n, 1848, 1)
 # Derived: "one look to twenty costs under two points of power"
-require_true("§3 K1->K20 power cost < 2pp",
+require_true("Deployment: K1->K20 power cost < 2pp",
              (row_k(1)$power - row_k(20)$power) < 0.02)
 # Derived: "cutting the expected stopping time by more than 800 patients"
-require_true("§3 K1->K20 expected-N saving > 800",
+require_true("Deployment: K1->K20 expected-N saving > 800",
              (row_k(1)$expected_n - row_k(20)$expected_n) > 800)
 # Derived: "five looks already capture about four-fifths of that saving"
 frac5 <- (row_k(1)$expected_n - row_k(5)$expected_n) /
   (row_k(1)$expected_n - row_k(20)$expected_n)
-require_true("§3 K=5 captures ~4/5 of the saving (0.75–0.88)",
+require_true("Deployment: K=5 captures ~4/5 of the saving (0.75–0.88)",
              frac5 > 0.75 && frac5 < 0.88)
 # Derived: "the anytime premium is about 11 points" (e-RT horizontal below plateau)
 prem <- mean(c(row_k(1)$power, row_k(20)$power)) -
   get_fair(alt, "e-RTb design directional")$crossed_any
-require_true("§3/§6 anytime premium ~11 points (0.095–0.125)",
+require_true("Deployment/Discussion anytime premium ~11 points (0.095–0.125)",
              prem > 0.095 && prem < 0.125)
 
-cat("\n=== §3 Table 2: union rule and repairs (ESM S16) ===\n")
+cat("\n=== Deployment, Table 2: union rule and repairs ===\n")
 
 ud <- read.csv(file.path(tables_dir, "union_doctrine.csv"),
                stringsAsFactors = FALSE, check.names = FALSE)
@@ -299,12 +299,12 @@ pin_t2("Repair B W>=100 + GS a=0.04",             0.043, 0.758)
 pin_t2("Repair B W>=200 + GS a=0.045",            0.047, 0.770)
 # "its false stops arrive early (median null stop at patient 1,953, versus 2,690)"
 udm_md <- file.path(tables_dir, "union_doctrine_medians.md")
-require_eq("§3 worst-case union median null stop (1,953)",
+require_eq("Deployment: worst-case union median null stop (1,953)",
            md_num(udm_md, "^\\|\\s*Null", 3), 1953, 0.5)
-require_eq("§3 schedule-alone median null stop (2,690)",
+require_eq("Deployment: schedule-alone median null stop (2,690)",
            md_num(udm_md, "^\\|\\s*Null", 2), 2690, 0.5)
 
-cat("\n=== §3 union path decomposition (ESM S16) ===\n")
+cat("\n=== Deployment: union path decomposition (ESM S16) ===\n")
 
 upd <- read.csv(file.path(tables_dir, "union_path_decomposition.csv"),
                 stringsAsFactors = FALSE)
@@ -316,13 +316,13 @@ get_upd <- function(rule) {
 }
 # "When the alert path does win — 7.1% of alternative trials — it wins by a
 # median of 1,317 patients"
-require_eq("§3 Repair A z3.0 alert-path share (7.1%)",
+require_eq("Deployment: Repair A z3.0 alert-path share (7.1%)",
            get_upd("Repair A z>=3.0")$via_confirmed_alert, 0.071, 0.002)
-require_eq("§3 Repair A z3.0 alert-path median lead (1,317)",
+require_eq("Deployment: Repair A z3.0 alert-path median lead (1,317)",
            get_upd("Repair A z>=3.0")$alert_won_median_lead, 1317, 0.5)
 # "the confirmation gate blocks roughly nine of ten alerts at the alert instant"
 blk <- get_upd("Repair A z>=3.0")$alert_unconfirmed / get_upd("Repair A z>=3.0")$alert_fired
-require_true("§3 confirmation gate blocks ~9/10 alerts (0.85–0.95)",
+require_true("Deployment: confirmation gate blocks ~9/10 alerts (0.85–0.95)",
              blk > 0.85 && blk < 0.95)
 # "The gentler settings give the alert path a substantial share of stops" (ESM S16:
 # 46.2% under z>=2.5, 41.2% under Repair B W>=100)
@@ -331,53 +331,53 @@ require_eq("ESM S16 Repair A z2.5 alert-path share (46.2%)",
 require_eq("ESM S16 Repair B W100 alert-path share (41.2%)",
            get_upd("Repair B W>=100 (+GS a=0.04)")$via_confirmed_alert, 0.412, 0.003)
 
-cat("\n=== §3 alert lead time (role-1 headline; Abstract) ===\n")
+cat("\n=== Deployment: alert lead time (Abstract; ESM S17) ===\n")
 
 alt_md <- file.path(tables_dir, "alert_lead_time.md")
 # "Among alternative trials where the scheduled design stopped, 91.8% had a
 # preceding e-RT alert, at a median of 776 patients before the stop (IQR 445–1,105)"
-require_eq("§3/Abstract alert precedes stop (91.8%)",
+require_eq("Deployment/Abstract alert precedes stop (91.8%)",
            md_num(alt_md, "^\\|\\s*Alternative", 3, pct = TRUE), 0.918, 0.003)
-require_eq("§3/Abstract median lead (776 patients)",
+require_eq("Deployment/Abstract median lead (776 patients)",
            md_num(alt_md, "^\\|\\s*Alternative", 4), 776, 0.5)
 iqr <- md_range(alt_md, "^\\|\\s*Alternative", 5)
-require_eq("§3 lead IQR lower (445)", iqr[1], 445, 0.5)
-require_eq("§3 lead IQR upper (1,105)", iqr[2], 1105, 0.5)
-require_eq("ESM S16 median z at alert (2.54)",
+require_eq("Deployment: lead IQR lower (445)", iqr[1], 445, 0.5)
+require_eq("Deployment: lead IQR upper (1,105)", iqr[2], 1105, 0.5)
+require_eq("ESM S17 median z at alert (2.54)",
            md_num(alt_md, "^\\|\\s*Alternative", 6), 2.54, 0.005)
 # "Under the null, preceding alerts accompany only 39.1% of the rare scheduled
 # stops (5.2%); under harm, none."
-require_eq("§3 null GS-stop rate context (5.2%)",
+require_eq("Deployment: null GS-stop rate context (5.2%)",
            md_num(alt_md, "^\\|\\s*Null", 2, pct = TRUE), 0.052, 0.003)
-require_eq("§3 null preceded share (39.1%)",
+require_eq("Deployment: null preceded share (39.1%)",
            md_num(alt_md, "^\\|\\s*Null", 3, pct = TRUE), 0.391, 0.003)
-require_eq("§3 harm preceded share (0.0%)",
+require_eq("Deployment: harm preceded share (0.0%)",
            md_num(alt_md, "^\\|\\s*Harm", 3, pct = TRUE), 0.000, 0.0005)
 
-cat("\n=== §3 design-versus-actual grid (ESM S17) ===\n")
+cat("\n=== Deployment: design-versus-actual grid (ESM S18) ===\n")
 
 dap <- read.csv(file.path(tables_dir, "ertb_design_actual_power.csv"),
                 stringsAsFactors = FALSE)
 dap_rev <- dap[dap$direction == "reversed", ]
 dap_des <- dap[dap$direction == "as-designed", ]
-require_true("ESM S17 grid has 16 as-designed + 16 reversed cells",
+require_true("ESM S18 grid has 16 as-designed + 16 reversed cells",
              nrow(dap_rev) == 16L && nrow(dap_des) == 16L)
 # "design e-RTb sits a few points below the fixed-sample power that set the
 # sample size (75.8% against 80.0%)"
 match_row <- dap_des[dap_des$p_ctrl == 0.4 & dap_des$design_arr == 0.05 &
                        dap_des$actual_arr == 0.05 & dap_des$target_power == 0.8, ]
-require_eq("§3 as-designed design e-RTb power (75.8%)",
+require_eq("Deployment: as-designed design e-RTb power (75.8%)",
            match_row$ertb_design_power, 0.758, 0.003)
-require_eq("§3 as-designed frequentist power (80.0%)",
+require_eq("Deployment: as-designed frequentist power (80.0%)",
            match_row$actual_frequentist_power, 0.800, 0.003)
 # "design e-RTb crossed in 0.0–0.5% of trials in every one of the 16 reversal cells"
-require_true("§3 reversal: design e-RTb <= 0.5% in all 16 cells",
+require_true("Deployment: reversal: design e-RTb <= 0.5% in all 16 cells",
              max(dap_rev$ertb_design_power) <= 0.005 + 1e-9)
-require_true("§3 reversal: design e-RTb >= 0.0% (sanity)",
+require_true("Deployment: reversal: design e-RTb >= 0.0% (sanity)",
              min(dap_rev$ertb_design_power) >= 0)
-# Artifact truth for the adaptive column in the reversal cells (ESM S17):
-require_eq("ESM S17 reversal adaptive min (6.7%)", min(dap_rev$ertb_adaptive_power), 0.067, 0.002)
-require_eq("ESM S17 reversal adaptive max (100%)", max(dap_rev$ertb_adaptive_power), 1.000, 0.002)
+# Artifact truth for the adaptive column in the reversal cells (ESM S18):
+require_eq("ESM S18 reversal adaptive min (6.7%)", min(dap_rev$ertb_adaptive_power), 0.067, 0.002)
+require_eq("ESM S18 reversal adaptive max (100%)", max(dap_rev$ertb_adaptive_power), 1.000, 0.002)
 # Main-text claim (corrected 2026-08-13, was "48–100%"): "the adaptive wager
 # retained 91–112% of its mirrored-benefit power in those same cells".
 # Definition: per reversal cell, adaptive reversal power / adaptive power at
@@ -389,13 +389,13 @@ mir_idx <- match(mir_key(dap_rev$p_ctrl, dap_rev$design_arr, abs(dap_rev$actual_
                          dap_rev$target_power, dap_rev$n_patients),
                  mir_key(dap_asd$p_ctrl, dap_asd$design_arr, dap_asd$actual_arr,
                          dap_asd$target_power, dap_asd$n_patients))
-require_true("§3 mirrored-benefit retention: all 16 reversal cells matched",
+require_true("Deployment: mirrored-benefit retention: all 16 reversal cells matched",
              !anyNA(mir_idx) && length(mir_idx) == 16)
 mir_ratio <- dap_rev$ertb_adaptive_power / dap_asd$ertb_adaptive_power[mir_idx]
-require_eq("§3 adaptive mirrored-benefit retention min (91%)", min(mir_ratio), 0.913, 0.005)
-require_eq("§3 adaptive mirrored-benefit retention max (112%)", max(mir_ratio), 1.121, 0.005)
+require_eq("Deployment: adaptive mirrored-benefit retention min (91%)", min(mir_ratio), 0.913, 0.005)
+require_eq("Deployment: adaptive mirrored-benefit retention max (112%)", max(mir_ratio), 1.121, 0.005)
 
-cat("\n=== §3 Bayesian sensitivity (Figure 6) ===\n")
+cat("\n=== Deployment: Bayesian sensitivity (Figure 6) ===\n")
 
 bayes_method <- read.csv(file.path(tables_dir, "bayesian_monitor_method_summary.csv"),
                          stringsAsFactors = FALSE)
@@ -406,9 +406,9 @@ get_bayes <- function(scen, thr) {
 }
 # "stopping at posterior probability 0.98 signals in 78.9% (alternative) and 4.7%
 # (null) by itself"
-require_eq("§3 Bayes 0.98 standalone alt (78.9%)",
+require_eq("Deployment: Bayes 0.98 standalone alt (78.9%)",
            get_bayes(alt, 0.98)$interrupted_any, 0.789, 0.005)
-require_eq("§3 Bayes 0.98 standalone null (4.7%)",
+require_eq("Deployment: Bayes 0.98 standalone null (4.7%)",
            get_bayes(nul, 0.98)$interrupted_any, 0.047, 0.003)
 
 union <- read.csv(file.path(tables_dir, "bayesian_ert_union_summary.csv"),
@@ -438,91 +438,91 @@ for (spec in list(
              spec$nul_exp, 0.005)
 }
 
-cat("\n=== §5 ARMA (validated BioLINCC) ===\n")
+cat("\n=== Completed trials: ARMA (validated BioLINCC) ===\n")
 
-# "55.6% of random-order permutations crossed for e-RTb" (+ ESM S6 BWA rows)
+# "55.6% of random-order permutations crossed for e-RTb" (+ ESM Section 6 BWA rows)
 arma_md <- file.path(tables_dir, "arma_adaptive_permutation_sensitivity.md")
-require_eq("§5 ARMA mortality e-RTb perm crossings (55.6%)",
+require_eq("Completed trials: ARMA mortality e-RTb perm crossings (55.6%)",
            md_num(arma_md, "^\\|\\s*Mortality e-RTb\\b", 3, pct = TRUE), 0.556, 0.005)
-require_eq("ESM S6 BWA-28 e-RTb perm crossings (94.2%)",
+require_eq("ESM Section 6 BWA-28 e-RTb perm crossings (94.2%)",
            md_num(arma_md, "^\\|\\s*BWA-28 failure e-RTb\\b", 3, pct = TRUE), 0.942, 0.005)
-require_eq("ESM S6 BWA-28 e-RTb observed crossing index (751)",
+require_eq("ESM Section 6 BWA-28 e-RTb observed crossing index (751)",
            md_num(arma_md, "^\\|\\s*BWA-28 failure e-RTb\\b", 2), 751, 0.5)
 
 if (have_trial_data) {
   arma <- fromJSON(file.path(results_dir, "arma_ert_summary_R.json"))
   arma_csv <- read.csv(file.path(csv_dir, "arma.csv"), stringsAsFactors = FALSE)
   # "the analysis cohort has 861 patients (429 control, 432 low tidal volume)"
-  require_eq("§5 ARMA cohort n (861)", arma$n_total, 861, 0.5)
-  require_eq("§5 ARMA control arm (429)", sum(arma_csv$arm == 0), 429, 0.5)
-  require_eq("§5 ARMA low-tidal-volume arm (432)", sum(arma_csv$arm == 1), 432, 0.5)
+  require_eq("Completed trials: ARMA cohort n (861)", arma$n_total, 861, 0.5)
+  require_eq("Completed trials: ARMA control arm (429)", sum(arma_csv$arm == 0), 429, 0.5)
+  require_eq("Completed trials: ARMA low-tidal-volume arm (432)", sum(arma_csv$arm == 1), 432, 0.5)
   # Counts quoted in the article: 173 control vs 134 treatment deaths
-  require_eq("§5 ARMA control deaths (173)", arma$ertd$n_deaths_control, 173, 0.5)
-  require_eq("§5 ARMA treatment deaths (134)", arma$ertd$n_deaths_treatment, 134, 0.5)
+  require_eq("Completed trials: ARMA control deaths (173)", arma$ertd$n_deaths_control, 173, 0.5)
+  require_eq("Completed trials: ARMA treatment deaths (134)", arma$ertd$n_deaths_treatment, 134, 0.5)
   # "mortality crossed with neither adaptive e-RTb nor e-RTe"
-  require_true("§5 ARMA mortality e-RTb did not cross (masked order)",
+  require_true("Completed trials: ARMA mortality e-RTb did not cross (masked order)",
                !isTRUE(arma$ert_binary$crossed_threshold))
-  require_true("§5 ARMA mortality e-RTe did not cross (masked order)",
+  require_true("Completed trials: ARMA mortality e-RTe did not cross (masked order)",
                !isTRUE(arma$ertd$crossed_threshold))
   # "the event-only stream ... a peak W ... of about 16.8"
-  require_eq("§5 ARMA e-RTe mortality peak W (prose ~16.8)",
+  require_eq("Completed trials: ARMA e-RTe mortality peak W (prose ~16.8)",
              arma$ertd$peak_wealth, 16.77, 0.05)
   # "BWA-28 crossed with both variants"
-  require_true("§5 ARMA BWA-28 crossed (patient-level e-RTb)",
+  require_true("Completed trials: ARMA BWA-28 crossed (patient-level e-RTb)",
                isTRUE(arma$bwa28_binary$crossed_threshold))
-  require_true("§5 ARMA BWA-28 crossed (event-only e-RTe)",
+  require_true("Completed trials: ARMA BWA-28 crossed (event-only e-RTe)",
                isTRUE(arma$bwa28_ertd$crossed_threshold))
-  # ESM S6 carried: ARR on mortality (9.3 pp; JSON rd is treatment-minus-control)
-  require_eq("ESM S6 ARMA mortality ARR (9.3 pp)", -100 * arma$ert_binary$rd, 9.3, 0.1)
+  # ESM Section 6 carried: ARR on mortality (9.3 pp; JSON rd is treatment-minus-control)
+  require_eq("ESM Section 6 ARMA mortality ARR (9.3 pp)", -100 * arma$ert_binary$rd, 9.3, 0.1)
 } else {
-  note_skip("§5 ARMA cohort, deaths, observed-order crossings, peak W, ARR (11 pins)",
+  note_skip("Completed trials: ARMA cohort, deaths, observed-order crossings, peak W, ARR (11 pins)",
             "needs the BioLINCC-derived files (data/README.md)")
 }
 
-cat("\n=== §5 FACTT (validated BioLINCC) ===\n")
+cat("\n=== Completed trials: FACTT (validated BioLINCC) ===\n")
 
 # "the fluid VFD endpoint crossed in the observed masked order and in 98.9% of
 # permutations"
 factt_md <- file.path(tables_dir, "factt_adaptive_permutation_sensitivity.md")
-require_eq("§5 FACTT fluid VFD-28 perm crossings (98.9%)",
+require_eq("Completed trials: FACTT fluid VFD-28 perm crossings (98.9%)",
            md_num(factt_md, "^\\|\\s*Fluid VFD-28 e-RTc\\b", 3, pct = TRUE), 0.989, 0.003)
 # "a same-tuning null crossing rate of about 2.5%" (conservative e-RTc, zero-
 # inflated integer DGP; descriptive contrast)
-require_eq("§5 same-tuning null rate (~2.5%; ZII conservative)",
+require_eq("Completed trials: same-tuning null rate (~2.5%; ZII conservative)",
            ertc_t1$type1[ertc_t1$dgp == "Zero-inflated integer" &
                            grepl("^Conservative", ertc_t1$setting)],
            0.025, 0.002)
 # "The catheter VFD trajectory ... 2.7% of permutations crossed"
-require_eq("§5 FACTT catheter perm crossings (2.7%)",
+require_eq("Completed trials: FACTT catheter perm crossings (2.7%)",
            md_num(factt_md, "^\\|\\s*Catheter VFD-28 e-RTc\\b", 3, pct = TRUE), 0.027, 0.002)
 
 if (have_trial_data) {
   factt <- fromJSON(file.path(results_dir, "factt_ert_summary_R.json"))
   # "the validated cohort is the full randomized sample of 1,000 patients (497
   # liberal versus 503 conservative; 487 central venous versus 513 pulmonary artery)"
-  require_eq("§5 FACTT n_total (1,000)", factt$n_total, 1000, 0.5)
-  require_eq("§5 FACTT n_liberal (497)", factt$n_liberal, 497, 0.5)
-  require_eq("§5 FACTT n_conservative (503)", factt$n_conservative, 503, 0.5)
-  require_eq("§5 FACTT n_cvc (487)", factt$n_cvc, 487, 0.5)
-  require_eq("§5 FACTT n_pac (513)", factt$n_pac, 513, 0.5)
-  require_true("§5 FACTT fluid VFD-28 crossed (masked order)",
+  require_eq("Completed trials: FACTT n_total (1,000)", factt$n_total, 1000, 0.5)
+  require_eq("Completed trials: FACTT n_liberal (497)", factt$n_liberal, 497, 0.5)
+  require_eq("Completed trials: FACTT n_conservative (503)", factt$n_conservative, 503, 0.5)
+  require_eq("Completed trials: FACTT n_cvc (487)", factt$n_cvc, 487, 0.5)
+  require_eq("Completed trials: FACTT n_pac (513)", factt$n_pac, 513, 0.5)
+  require_true("Completed trials: FACTT fluid VFD-28 crossed (masked order)",
                isTRUE(factt$ertc_vfd28$fluid_comparison$crossed_threshold))
-  require_eq("ESM S6 fluid VFD-28 observed crossing index (131)",
+  require_eq("ESM Section 6 fluid VFD-28 observed crossing index (131)",
              factt$ertc_vfd28$fluid_comparison$crossing_patient, 131, 0.5)
   # "The catheter VFD trajectory ... peak W ≈ 2.42 ... drifted to W ≈ 0.05 by trial end"
-  require_true("§5 FACTT catheter VFD-28 did not cross",
+  require_true("Completed trials: FACTT catheter VFD-28 did not cross",
                !isTRUE(factt$ertc_vfd28$catheter_comparison$crossed_threshold))
-  require_eq("§5 FACTT catheter peak W (2.42)",
+  require_eq("Completed trials: FACTT catheter peak W (2.42)",
              factt$ertc_vfd28$catheter_comparison$peak_evalue, 2.42, 0.005)
   # "W ≈ 0.05" in the prose matches the frozen 0.0543.
-  require_eq("§5 FACTT catheter final W (0.054; prose '~0.05')",
+  require_eq("Completed trials: FACTT catheter final W (0.054; prose '~0.05')",
              factt$ertc_vfd28$catheter_comparison$final_evalue, 0.054, 0.005)
 } else {
-  note_skip("§5 FACTT cohort, observed-order crossings, catheter peak and final W (10 pins)",
+  note_skip("Completed trials: FACTT cohort, observed-order crossings, catheter peak and final W (10 pins)",
             "needs the BioLINCC-derived files (data/README.md)")
 }
 
-cat("\n=== §6 discussion bridges: Type M, batching, delay ===\n")
+cat("\n=== Discussion bridges: Type M, batching, delay ===\n")
 
 # Type M numbers are carried from the submission freeze (per-patient policies vs
 # comparators; ESM S19 continuity family)
@@ -533,15 +533,15 @@ get_old <- function(scen, meth) {
   if (nrow(r) == 0L) stop("Missing submission-freeze row: ", scen, " / ", meth)
   r
 }
-require_eq("§6 adaptive e-RTb Type M (1.26)",
+require_eq("Discussion: adaptive e-RTb Type M (1.26)",
            get_old(alt, "e-RTb adaptive")$median_type_m, 1.26, 0.02)
-require_eq("§6 design e-RTb Type M (1.19)",
+require_eq("Discussion: design e-RTb Type M (1.19)",
            get_old(alt, "e-RTb design directional")$median_type_m, 1.19, 0.02)
-require_eq("§6 Pocock Type M (1.07)",
+require_eq("Discussion: Pocock Type M (1.07)",
            get_old(alt, "Pocock two-sided")$median_type_m, 1.07, 0.02)
-require_eq("§6 OBF Type M (~1.00, fires at final look)",
+require_eq("Discussion: OBF Type M (~1.00, fires at final look)",
            get_old(alt, "OBF two-sided")$median_type_m, 1.00, 0.02)
-require_eq("§6 Haybittle-Peto Type M (~1.00, fires at final look)",
+require_eq("Discussion: Haybittle-Peto Type M (~1.00, fires at final look)",
            get_old(alt, "Haybittle-Peto")$median_type_m, 1.00, 0.02)
 
 bat <- read.csv(file.path(tables_dir, "batched_updating_sensitivity.csv"),
@@ -552,15 +552,15 @@ bat_des_null <- bat[grepl("^Null", bat$scenario) &
                       bat$method == "e-RTb design directional", ]
 # "every-100-patient inspection lowered the design wager crossing rate from 74.9%
 # to 71.1% (median alert 1,282 to 1,400 ...) while null rates fell" (ESM S11)
-require_eq("§6 batching design per-patient rate (74.9%)",
+require_eq("Discussion: batching design per-patient rate (74.9%)",
            bat_des$crossed[bat_des$batch == 1], 0.749, 0.003)
-require_eq("§6 batching design batch-100 rate (71.1%)",
+require_eq("Discussion: batching design batch-100 rate (71.1%)",
            bat_des$crossed[bat_des$batch == 100], 0.711, 0.003)
-require_eq("§6 batching design per-patient median (1,282)",
+require_eq("Discussion: batching design per-patient median (1,282)",
            bat_des$median_crossing[bat_des$batch == 1], 1282, 1)
-require_eq("§6 batching design batch-100 median (1,400)",
+require_eq("Discussion: batching design batch-100 median (1,400)",
            bat_des$median_crossing[bat_des$batch == 100], 1400, 1)
-require_true("§6 batching: null rate falls under batch-100 inspection",
+require_true("Discussion: batching: null rate falls under batch-100 inspection",
              bat_des_null$crossed[bat_des_null$batch == 100] <
                bat_des_null$crossed[bat_des_null$batch == 1])
 # "even with a 300-patient lag, a design alert preceded the end of enrollment
@@ -569,9 +569,9 @@ require_true("§6 batching: null rate falls under batch-100 inspection",
 lag <- read.csv(file.path(tables_dir, "ascertainment_delay.csv"),
                 stringsAsFactors = FALSE)
 lag_des <- lag[lag$method == "e-RTb design directional" & lag$lag == 300, ]
-require_eq("§6 300-patient lag: alert before enrollment end, all trials (69.6%)",
+require_eq("Discussion: 300-patient lag: alert before enrollment end, all trials (69.6%)",
            lag_des$alert_before_enrollment_end, 0.696, 0.003)
-require_eq("§6 300-patient lag: among alerting trials (derived 93.0%)",
+require_eq("Discussion: 300-patient lag: among alerting trials (derived 93.0%)",
            lag_des$alert_before_enrollment_end / lag_des$crossing_rate,
            0.930, 0.003)
 
@@ -596,7 +596,7 @@ require_eq("ESM S13 2s K3 look 3 (1.993)", bnd_val("ldobf_k3_2s_05", 3), 1.993, 
 require_eq("ESM S13 2s K3 a=0.04 look 1 (3.863)", bnd_val("ldobf_k3_2s_04", 1), 3.863, 0.0015)
 require_eq("ESM S13 2s K3 a=0.045 look 1 (3.783)", bnd_val("ldobf_k3_2s_045", 1), 3.783, 0.0015)
 
-cat("\n=== ESM S18–S19: submission-freeze continuity (conditional comparisons) ===\n")
+cat("\n=== ESM S19: submission-freeze continuity (conditional comparisons) ===\n")
 
 joint <- read.csv(file.path(tables_dir, "ertb_interruption_joint_summary.csv"),
                   stringsAsFactors = FALSE)
@@ -618,7 +618,7 @@ require_eq("ESM S19 adaptive earlier | both (Pocock) (62.3%)",
            get_joint(alt, "Pocock + adaptive e-RTb")$ert_before_base_given_both, 0.623, 0.01)
 require_eq("ESM S19 adaptive earlier | both (HP) (98.0%)",
            get_joint(alt, "HP + adaptive e-RTb")$ert_before_base_given_both, 0.980, 0.01)
-# Carried either-trigger null unions (submission §3.2; now ESM S19 context)
+# Carried either-trigger null unions (Section 3.2 of the original submission; now ESM S19 context)
 require_eq("ESM S19 OBF+design null union (7.7%)",
            get_joint(nul, "OBF + design e-RTb")$combined, 0.077, 0.003)
 require_eq("ESM S19 Pocock+design null union (6.7%)",
@@ -645,10 +645,10 @@ require_eq("ESM S19 design earlier than Pocock @ N=3084 (92.8%)",
 
 cat("\n=== ESM S20: the design-wager premium decomposed (round 2) ===\n")
 
-prem <- read.csv(file.path(tables_dir, "premium_decomposition.csv"), stringsAsFactors = FALSE)
+prem_tab <- read.csv(file.path(tables_dir, "premium_decomposition.csv"), stringsAsFactors = FALSE)
 prem_meta <- readLines(file.path(tables_dir, "premium_decomposition_meta.csv"))
 get_prem <- function(pattern, col = "estimate") {
-  r <- prem[[col]][grepl(pattern, prem$quantity, fixed = TRUE)]
+  r <- prem_tab[[col]][grepl(pattern, prem_tab$quantity, fixed = TRUE)]
   if (length(r) != 1L) stop("Missing or duplicated premium row: ", pattern)
   r
 }
@@ -673,8 +673,8 @@ require_eq("ESM S20 representation SE (0.1)", get_prem("representation:", "mc_se
 require_eq("ESM S20 boundary gap (12.7 pt)", get_prem("boundary/horizon:"), 0.127, half)
 require_eq("ESM S20 boundary SE (0.5)", get_prem("boundary/horizon:", "mc_se"), 0.005, half)
 # "a test calibrated for a fixed N rejects at a final wealth of about 1.9"
-require_eq("§6 fixed-N critical final wealth (1.93)", get_meta("critical_value_W"), 1.93, 0.0051)
-require_eq("§6 fixed-N critical final wealth ('about 1.9')", get_meta("critical_value_W"), 1.9, 0.051)
+require_eq("Discussion: fixed-N critical final wealth (1.93)", get_meta("critical_value_W"), 1.93, 0.0051)
+require_eq("Discussion: fixed-N critical final wealth ('about 1.9')", get_meta("critical_value_W"), 1.9, 0.051)
 require_eq("ESM S20 betting patients (2,689)", get_meta("n_bet"), 2689, 0)
 # "the supremum recovers about half" of the gap between the terminal and the fixed-N test
 require_eq("ESM S20 supremum recovers about half",
@@ -683,7 +683,7 @@ require_eq("ESM S20 supremum recovers about half",
 require_true("ESM S20 calibration seed 20260554 recorded",
              any(prem_meta == "calibration_seed,20260554"))
 # "defaults n_0 = 30 and n_r = 50 events" (e-RTe kernel)
-require_true("§2 e-RTe kernel defaults burn_in = 30, ramp = 50",
+require_true("Construction: e-RTe kernel defaults burn_in = 30, ramp = 50",
              any(grepl("burn_in = 30, ramp = 50", readLines(local_ert_file("erte.R"), warn = FALSE), fixed = TRUE)))
 
 cat("\n=== Out-of-order updates: which p_i prices the wager (round 2; not tabulated in the article) ===\n")

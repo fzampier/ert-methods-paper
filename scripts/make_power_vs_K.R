@@ -9,8 +9,8 @@
 # group-sequential Brownian approximation, Z_k ~ N(theta*sqrt(t_k), 1) with
 # cov(Z_j, Z_k) = sqrt(t_j/t_k); power and expected stopping information have
 # closed multivariate-normal forms (mvtnorm), so these numbers carry no Monte
-# Carlo error.  This quantifies R3.1's K=5-suffices point in the reviewer's
-# own currency and, next to the e-RT crossing rates from the fair-comparator
+# Carlo error.  This quantifies R3.1's point that K=5 looks suffice and,
+# next to the e-RT crossing rates from the fair-comparator
 # simulation, states the price of anytime validity as a number (R1.3).
 #
 # Outputs: tables/power_vs_K.csv, tables/power_vs_K.md
