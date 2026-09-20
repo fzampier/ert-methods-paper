@@ -31,15 +31,16 @@ figures:
 	Rscript scripts/make_fig6_bayes_union.R
 
 # Tables that are post-processing of frozen per-trial outputs (seconds, no RNG;
-# make_power_vs_K.R carries ~1e-6 quadrature jitter, see README).
+# make_power_vs_K.R carries a small quadrature jitter, see README).
 postprocess:
 	Rscript scripts/make_cumulative_at_looks.R
 	Rscript scripts/make_union_path_decomposition.R
 	Rscript scripts/make_power_vs_K.R
 
-# Every simulation, seeds fixed in the scripts. About 1.5 hours in sequence;
-# the scripts are independent of each other and can run in parallel
-# (fair comparators first if you also want to rebuild its post-processing).
+# Every simulation, seeds fixed in the scripts. About 80 minutes in sequence.
+# The order matters in two places: make_ertb_fair_comparators.R reads a summary
+# written by make_ertb_interruption_curve.R, and
+# make_batched_updating_sensitivity.R reads the fair-comparator outputs.
 simulations:
 	Rscript scripts/make_ertb_section_3_tables.R
 	Rscript scripts/make_blocked_randomization_sensitivity.R

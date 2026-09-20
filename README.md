@@ -30,8 +30,8 @@ scripts produced.
 ## Requirements
 
 R 4.6.1 with `tidyverse`, `rpact`, `mvtnorm`, `patchwork`, `ggh4x`, `scales`,
-and `Rcpp` (FACTT script only); `jsonlite` for the trial pins of the number
-check. Exact versions are in `sessionInfo.txt`. Figure 1 needs Python 3 with
+and `Rcpp` with a C++ compiler (FACTT script only); `jsonlite` for the trial
+pins of the number check. Exact versions are in `sessionInfo.txt`. Figure 1 needs Python 3 with
 `matplotlib`.
 
 ## Checks
@@ -72,7 +72,24 @@ reproduce its frozen rows.
 
 `scripts/make_power_vs_K.R` integrates multivariate normal probabilities with
 `mvtnorm`, whose default algorithm uses randomized quadrature. Reruns move
-`tables/power_vs_K.csv` by about 1e-6, far below the reported precision.
+`tables/power_vs_K.csv` in the sixth decimal of power (up to 4e-5 in the
+achieved-alpha column and 0.01 patients in the expected stopping time at 20
+looks). The rounded table `tables/power_vs_K.md` and every pinned number stay
+the same.
+
+Runtimes on one core of an Apple-silicon desktop: 21 to 24 minutes for each of
+the two e-RTc simulations, 7 to 9 minutes for the blocked-randomization and the
+design-versus-actual simulations, and under 3 minutes for every other script;
+about 80 minutes for everything in sequence.
+
+## Verification of this copy
+
+On 2026-09-19 all 26 scripts were rerun from a copy of this repository (R 4.6.1,
+macOS, Apple silicon), and `make check`, `make figures`, and `make trials` were
+run from a fresh clone. All 59 files under `tables/` came back byte for byte,
+except `tables/power_vs_K.csv` (the quadrature jitter described above). All PNG
+figures came back byte for byte from the frozen inputs. PDF figures differ in
+bytes on every run while their PNG versions are identical.
 
 ## Where each result comes from
 
