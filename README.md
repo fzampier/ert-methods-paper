@@ -32,8 +32,8 @@ scripts produced.
 
 R 4.6.1 with `tidyverse`, `rpact`, `mvtnorm`, `patchwork`, `ggh4x`, `scales`,
 and `Rcpp` with a C++ compiler (FACTT script only); `jsonlite` for the trial
-pins of the number check. Exact versions are in `sessionInfo.txt`. Figure 1 needs Python 3 with
-`matplotlib`.
+pins of the number check. Exact versions are in `sessionInfo.txt`. Figure 1
+needs Python 3 with `matplotlib`.
 
 ## Checks
 
@@ -164,4 +164,5 @@ move.
 
 ## License
 
-MIT for the source code and scripts; see `LICENSE`.
+MIT for the source code and scripts; see `LICENSE`. The tables and figures are
+under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
