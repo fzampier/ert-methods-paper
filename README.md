@@ -1,10 +1,17 @@
 # e-RT: code and frozen results for the article
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22906388.svg)](https://doi.org/10.5281/zenodo.22906388)
+
 Code, simulation outputs, and figures for
 
 > Zampieri FG, Albuquerque AM, Ramdas A. Sequential randomization tests using
 > e-values for clinical trial monitoring across endpoint types.
 > (Under review. The citation and DOI will be added on publication.)
+
+Every release of this repository is archived on Zenodo. The concept DOI
+[10.5281/zenodo.22906388](https://doi.org/10.5281/zenodo.22906388) resolves to
+the latest release; release v1.0.0, the state at the article's resubmission,
+is [10.5281/zenodo.22906389](https://doi.org/10.5281/zenodo.22906389).
 
 e-RT is a randomization-based e-value method for continuous trial monitoring.
 The article describes three variants: e-RTb for binary endpoints, e-RTe for
